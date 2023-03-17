@@ -4,7 +4,8 @@ MAINTAINER Martin van Beurden <chadoe@gmail.com>
 
 COPY ./bin /usr/local/bin
 
-RUN apk add --no-cache \
+RUN set -xe \
+    && apk add --update --no-cache \
         bash \
         git \
         iptables \
@@ -13,14 +14,12 @@ RUN apk add --no-cache \
     \
     # Get easy-rsa
     && git clone --branch 'v3.0.6' --depth 1 'https://github.com/OpenVPN/easy-rsa.git' /tmp/easy-rsa \
-    && cd \
     \
     # Cleanup
     && apk del \
         git \
     && rm -rf /tmp/easy-rsa/.git \
-    && cp -a /tmp/easy-rsa /usr/local/share/ \
-    && rm -rf /tmp/easy-rsa/ \
+    && mv /tmp/easy-rsa /usr/local/share/ \
     && ln -s /usr/local/share/easy-rsa/easyrsa3/easyrsa /usr/local/bin \
     && chmod 774 /usr/local/bin/*
 
