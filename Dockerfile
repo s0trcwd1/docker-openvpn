@@ -7,6 +7,7 @@ COPY ./bin /usr/local/bin
 RUN set -xe \
     && apk add --update --no-cache \
         bash \
+        coreutils \
         git \
         iptables \
         openssl \
