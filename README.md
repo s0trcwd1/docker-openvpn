@@ -17,6 +17,7 @@ Setup a tiny(12MB), but full featured and secure OpenVPN server without effort u
 2. Initialize the `$OVPN_DATA` container that will hold the configuration files and certificates
 
         docker run -v $OVPN_DATA:/etc/openvpn --rm martin/openvpn initopenvpn -u udp://VPN.SERVERNAME.COM
+
         docker run -v $OVPN_DATA:/etc/openvpn --rm -it martin/openvpn initpki
 
 3. Start OpenVPN server process
@@ -59,8 +60,8 @@ Setup a tiny(12MB), but full featured and secure OpenVPN server without effort u
 * To view the log output run `docker logs openvpn`, to view it realtime run `docker logs -f openvpn`
 
 ## Settings and features
-* OpenVPN 2.6.1
-* Easy-RSA v3.0.1+
+* OpenVPN 2.6.5
+* Easy-RSA v3.1.5+
 * `tun` mode because it works on the widest range of devices. `tap` mode, for instance, does not work on Android, except if the device is rooted.
 * The UDP server uses`192.168.255.0/24` for clients.
 * TLS 1.2 minimum
@@ -71,7 +72,7 @@ Setup a tiny(12MB), but full featured and secure OpenVPN server without effort u
 * 2048 bits key size
 * Client certificate revocation functionality
 * SHA256 signature hash
-* AES-256-CBC cipher
+* AES-256-GCM cipher
 * TLS cipher limited to TLS-ECDHE-RSA-WITH-AES-128-GCM-SHA256, TLS-ECDHE-ECDSA-WITH-AES-128-GCM-SHA256, TLS-DHE-RSA-WITH-AES-256-GCM-SHA384 or TLS-DHE-RSA-WITH-AES-256-CBC-SHA256
 * Compression enabled and set to adaptive
 * Floating client ip's enabled
@@ -86,9 +87,8 @@ Setup a tiny(12MB), but full featured and secure OpenVPN server without effort u
 ## Tested On
 
 * Clients
-  * Android, OpenVPN Connect 1.1.14 (built 56)
-  * Android, OpenVPN for Android 0.6.50
-  * Windows 10 64 bit using openvpn-2.4.0
+  * Android, OpenVPN for Android 0.7.46
+  * Windows 10 64 bit using openvpn-2.6.5
 
 
 Based on [kylemanna/docker-openvpn](https://github.com/kylemanna/docker-openvpn).
