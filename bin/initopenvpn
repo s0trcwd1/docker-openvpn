@@ -65,6 +65,11 @@ TMP_PUSH=()
 # Import defaults if present
 [ -r "$OVPN_ENV" ] && source "$OVPN_ENV"
 
+# Init easy-rsa vars file
+if [ ! -f $OPENVPN/vars ]; then
+    touch $OPENVPN/vars
+fi
+
 # Parse arguments
 while getopts ":r:s:du:cp:DNm:" opt; do
     case $opt in
