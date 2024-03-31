@@ -5,7 +5,7 @@ MAINTAINER Martin van Beurden <chadoe@gmail.com>
 COPY ./bin /usr/local/bin
 
 RUN set -xe && \
-    apk add --update --no-cache bash easy-rsa git iptables openssl openvpn=2.6.10-r0 && \
+    apk add --update --no-cache bash easy-rsa iptables openssl openvpn=2.6.10-r0 && \
     ln -s /usr/share/easy-rsa/easyrsa /usr/local/bin && \
     chmod 774 /usr/local/bin/*
 
