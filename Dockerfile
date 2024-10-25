@@ -5,7 +5,7 @@ LABEL org.opencontainers.image.authors="Martin van Beurden <chadoe@gmail.com>"
 COPY ./bin /usr/local/bin
 
 RUN set -xe && \
-    apk add --update --no-cache bash easy-rsa iptables openssl openvpn=2.6.11-r0 && \
+    apk add --update --no-cache bash easy-rsa iptables openssl openvpn=2.6.12-r1 && \
     ln -s /usr/share/easy-rsa/easyrsa /usr/local/bin && \
     chmod 774 /usr/local/bin/*
 
