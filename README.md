@@ -11,6 +11,7 @@ Setup a tiny(12MB), but full featured and secure OpenVPN server without effort u
 
 1. Create the `$OVPN_DATA` volume container 
 
+	service docker start
         export OVPN_DATA=openvpn_data
         docker volume create --name $OVPN_DATA
 
