@@ -10,22 +10,24 @@ Setup a tiny(12MB), but full featured and secure OpenVPN server without effort u
 ## Quick Start
 
 1. Create the `$OVPN_DATA` volume container 
-
+	apk add docker
+	rc-update add docker boot
+	
 	service docker start
         export OVPN_DATA=openvpn_data
         docker volume create --name $OVPN_DATA
 
-2. Initialize the `$OVPN_DATA` container that will hold the configuration files and certificates
+3. Initialize the `$OVPN_DATA` container that will hold the configuration files and certificates
 
         docker run -v $OVPN_DATA:/etc/openvpn --rm martin/openvpn initopenvpn -u udp://VPN.SERVERNAME.COM
 
         docker run -v $OVPN_DATA:/etc/openvpn --rm -it martin/openvpn initpki
 
-3. Start OpenVPN server process
+4. Start OpenVPN server process
 
         docker run --name openvpn -v $OVPN_DATA:/etc/openvpn -v /etc/localtime:/etc/localtime:ro -d -p 1194:1194/udp --cap-add=NET_ADMIN martin/openvpn
 
-4. Generate a client certificate
+5. Generate a client certificate
 
         docker run -v $OVPN_DATA:/etc/openvpn --rm -it martin/openvpn easyrsa build-client-full CLIENTNAME
 
@@ -33,7 +35,7 @@ Setup a tiny(12MB), but full featured and secure OpenVPN server without effort u
 
             docker run -v $OVPN_DATA:/etc/openvpn --rm -it martin/openvpn easyrsa build-client-full CLIENTNAME nopass
 
-5. Retrieve the client configuration with embedded certificates
+6. Retrieve the client configuration with embedded certificates
 
         docker run -v $OVPN_DATA:/etc/openvpn --rm martin/openvpn getclient CLIENTNAME > CLIENTNAME.ovpn
 
@@ -41,17 +43,17 @@ Setup a tiny(12MB), but full featured and secure OpenVPN server without effort u
 
             docker run -v $OVPN_DATA:/etc/openvpn --rm martin/openvpn getclient -M 1312 CLIENTNAME > CLIENTNAME.ovpn
 
-6. Revoke a client certificate
+7. Revoke a client certificate
 		
     If you need to remove access for a client then you can revoke the client certificate by running
 
         docker run -v $OVPN_DATA:/etc/openvpn --rm -it martin/openvpn revokeclient CLIENTNAME
 
-7. List all generated certificate names (includes the server certificate name)
+8. List all generated certificate names (includes the server certificate name)
 
         docker run -v $OVPN_DATA:/etc/openvpn --rm martin/openvpn listcerts
 
-8. Renew the CRL
+9. Renew the CRL
 
         docker run -v $OVPN_DATA:/etc/openvpn --rm -it martin/openvpn renewcrl
 
